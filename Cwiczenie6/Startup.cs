@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cwiczenie6.Middleware;
 using Cwiczenie6.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,6 +51,7 @@ namespace Cwiczenie6
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Students api V1");
             });
 
+            app.UseMiddleware<LoggingMiddleware>();
             app.UseWhen(context => context.Request.Path.ToString().Contains("index"), app =>
             {
                 app.Use(async (context, next) =>
