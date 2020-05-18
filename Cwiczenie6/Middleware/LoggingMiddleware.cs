@@ -27,7 +27,7 @@ namespace Cwiczenie6.Middleware
                 string queryString = context.Request.QueryString.ToString();
                 string bodyStr = "";
 
-                string[] messages = { path, method, queryString, bodyStr };
+                
 
                 using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8, true, 1024, true))
                 {
@@ -35,6 +35,7 @@ namespace Cwiczenie6.Middleware
                     context.Request.Body.Position = 0;
                     
                 }
+                string[] messages = { path, method, queryString, bodyStr };
                 System.IO.File.WriteAllLines(@"C:\Users\Public\Messages.txt", messages);
             }
 
