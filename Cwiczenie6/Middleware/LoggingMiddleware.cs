@@ -28,13 +28,14 @@ namespace Cwiczenie6.Middleware
                 string bodyStr = "";
 
                 string[] messages = { path, method, queryString, bodyStr };
-                System.IO.File.WriteAllLines(@"C:\Users\Public\Messages.txt", messages);
-                using(var reader = new StreamReader(context.Request.Body, Encoding.UTF8, true, 1024, true))
+
+                using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8, true, 1024, true))
                 {
                     bodyStr = await reader.ReadToEndAsync();
                     context.Request.Body.Position = 0;
+                    
                 }
-
+                System.IO.File.WriteAllLines(@"C:\Users\Public\Messages.txt", messages);
             }
 
             if(_next!=null) await _next(context);
